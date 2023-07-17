@@ -1,3 +1,4 @@
+from tqdm import tqdm
 import zipfile
 import itertools
 
@@ -11,14 +12,10 @@ chars_dict = '123456789'
 # 这里repeat理解成密码长度为6位，当然可以用循环定制密码长度范围，这里简单处理
 passwords = itertools.product(chars_dict, repeat=9)
 
-# 计数
-count = 0
-
 # 把文件列表中的文件取出来，尝试用密码列表中的密码解密
 for f in zip_list:
     # 从密码列表中循环去除密码测试解密
-    for password in passwords:
-        count = count + 1
+    for password in tqdm(passwords):
         key = ''.join(password)
         # 成功解密后，把正确的解压密码打印出来，并结束循环
         try:
@@ -27,6 +24,5 @@ for f in zip_list:
             break
         # 如果密码错误，打印报错信息
         except Exception as Error:
-            if count % 100000 == 0:
-                print(f'Attempted times: {count}')
+            continue
             # print(Error)
