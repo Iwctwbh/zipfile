@@ -8,9 +8,12 @@ zip_file = zipfile.ZipFile('./test.zip')
 zip_list = zip_file.namelist()
 
 # 有可能构成密码字符（穷举字典）
-chars_dict = '1234567'
+chars_dict = '0123456789'
 # 这里repeat理解成密码长度为6位，当然可以用循环定制密码长度范围，这里简单处理
-passwords = itertools.product(chars_dict, repeat=7)
+passwords = itertools.product(chars_dict, repeat=6)
+
+# for times in range (6, 17):
+#    itertools.product(keys, repeat = times)
 
 # 用一个列表，来装itertools穷举出的密码字符串
 list_password = list()
